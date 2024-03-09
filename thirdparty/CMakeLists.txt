@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.16)
 
 # c89atomic
 add_library(c89atomic INTERFACE)
@@ -73,7 +73,16 @@ target_include_directories(sokol_time INTERFACE sokol_time/include)
 
 # sdl2
 set(LIBC ON CACHE BOOL "" FORCE)
-add_subdirectory(sdl2)
+include(ExternalProject)
+ExternalProject_Add(sdl2
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/sdl2
+    CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/sdl2/autogen.sh && ${CMAKE_CURRENT_SOURCE_DIR}/sdl2/configure --enable-hidapi --without-x -prefix=${CMAKE_BINARY_DIR}/thirdparty/sdl2-prefix
+    BUILD_COMMAND ${MAKE}
+    INSTALL_COMMAND make install
+)
+# add_library(sdl2 STATIC IMPORTED GLOBAL)
+# add_dependencies(modbus libmodbus)
+# add_subdirectory(sdl2)
 
 # glfw
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)

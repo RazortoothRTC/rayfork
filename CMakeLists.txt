@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
+cmake_minimum_required(VERSION 3.16)
 project(rayfork)
 
 # Include the cmake file with all the options for configuring rayfork from cmake
