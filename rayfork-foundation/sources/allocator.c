@@ -1,7 +1,16 @@
 #include "rayfork/foundation/allocator.h"
 
+// XXX PORTING
+#if defined(USE_LOCAL_HEADERS)
 #include "string.h"
 #include "malloc.h"
+#elif defined(__APPLE__) && !TARGET_OS_IPHONE
+#include <stdlib.h>
+#include <string.h>
+#else
+#include <malloc.h>
+#include <string.h>
+#endif
 
 rf_extern rf_allocator_result rf_libc_allocator_wrapper(rf_inout rf_allocator* this_allocator, rf_allocator_mode mode, rf_allocator_args args)
 {

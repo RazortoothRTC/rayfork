@@ -14,7 +14,7 @@
 #define rf_buffer_size(size_member)
 #define rf_field_range(begin, end)
 
-#include "sal.h"
+// XXX PORTING #include "sal.h"
 #if defined(rayfork_enable_sal_annotations)
 
 #define rf_in _In_
